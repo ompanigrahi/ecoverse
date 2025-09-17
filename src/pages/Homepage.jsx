@@ -67,7 +67,7 @@ export default function HomePage() {
               }}
               onClick={() => navigate("/login")}
             >
-              Login
+              Logout
             </Button>
           )}
         </div>

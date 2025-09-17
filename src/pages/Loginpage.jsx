@@ -62,12 +62,20 @@ export default function LoginPage() {
         if (detailsData.success && detailsData.data) {
           // Save user details in localStorage
           localStorage.setItem("user", JSON.stringify(detailsData.data));
-        }
 
-        // Step 3: Redirect after short delay
-        setTimeout(() => {
-          navigate("/admin-forms"); // redirect to admin forms section
-        }, 1200);
+          // Step 3: Redirect based on user type
+          setTimeout(() => {
+            const user = detailsData.data;
+
+            if (user.type === "admin") {
+              navigate("/admin-forms");
+            } else if (user.type === "user") {
+              navigate("/form");
+            } else {
+              navigate("/"); // fallback to landing
+            }
+          }, 1200);
+        }
       } else {
         toast.error(data.message || "Invalid username or password", {
           style: {
